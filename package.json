@@ -1,0 +1,22 @@
+{
+  "name": "scokets_fun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "p1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qh4r/socketsFun.git"
+  },
+  "author": "qh4r",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qh4r/socketsFun/issues"
+  },
+  "homepage": "https://github.com/qh4r/socketsFun",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}
