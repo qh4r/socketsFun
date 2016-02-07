@@ -2,7 +2,12 @@
 
 var minimist = require('minimist');
 
-var args = minimist(process.argv.slice(2), {string: "name company"});
+var args = minimist(process.argv.slice(2), {string: "name company help"});
+
+if(args.help) {
+	console.log('use --name and --company arguments like this: --name="John"');
+	process.exit(1);
+}
 
 var arg1 = process.argv[2];
 
