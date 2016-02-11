@@ -20,6 +20,7 @@
     "asynquence": "^0.8.2",
     "asynquence-contrib": "^0.24.0",
     "minimist": "^1.2.0",
-    "node-static": "^0.7.7"
+    "node-static": "^0.7.7",
+    "socket.io": "^0.9.16"
   }
 }

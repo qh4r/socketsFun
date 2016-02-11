@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+        <html>
+<head>
+    <title>s3.html</title>
+</head>
+<body>
+<h1>s4.hmtl</h1>
+<div class="chat">
+
+</div>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    $(function(){
+
+    });
+//    console.log(io);
+
+    var socket = io.connect('/');
+    socket.on('connected', function(){
+        console.log('connected');
+    }).on('chat', function(data){
+//        console.log('wiaodmosc: '+ data);
+        $('.chat').append($('<p>'+data+'</p>'));
+    }).on('disconnect', function(){
+        console.log('disconnected');
+    });
+</script>
+</body>
+</html>
