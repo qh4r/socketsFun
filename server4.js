@@ -8,6 +8,9 @@ var nodeStatic = require('node-static');
 var handleIo = function (socket) {
     socket.on('disconnect', function(){
         console.log('client disconnected');
+    }).on('chat', function(data){
+        socket.emit('chat', data);
+        socket.broadcast.emit('chat', data);
     });
     console.log('client connected');
     process.stdin.on('data', function(chunk) {

@@ -5,6 +5,8 @@
 </head>
 <body>
 <h1>s4.hmtl</h1>
+<input id="text" type="text" name="talkText">
+<button id="commit" name="commit">Send</button>
 <div class="chat">
 
 </div>
@@ -12,7 +14,11 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     $(function(){
-
+        var text = $('#text')
+        $('#commit').on('click',function(){
+            socket.emit('chat', 'browser: ' + text.val());
+            text.val('');
+        })
     });
 //    console.log(io);
 
