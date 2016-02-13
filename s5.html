@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>s5.html</title>
+    <style>
+        .box {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            left: 0px;
+            top: 0px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<h1>s5.hmtl</h1>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    $(function () {
+        $(document).bind('mousemove', function (event) {
+            socket.emit('movement', {x: event.pageX, y: event.pageY});
+        })
+    });
+    //    console.log(io);
+
+    var boxes = {};
+    var socket = io.connect('/');
+    socket.on('connected', function () {
+        console.log('connected');
+    }).on('spy', function (data) {
+        if (!boxes[data.color]) {
+            var newBox = $('<div class="box" style="background-color: '+data.color+'" id='+data.color+'></div>');
+            $('body').append(newBox);
+            boxes[data.color] = newBox;
+        }
+        $('#'+data.color).offset({top: data.y, left: data.x});
+//        console.log('wiaodmosc: '+ data);
+    }).on('remove',function(color){
+        boxes[color].remove();
+        delete boxes[color];
+    }).on('disconnect', function () {
+        console.log('disconnected');
+    });
+</script>
+</body>
+</html>
