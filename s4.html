@@ -16,7 +16,8 @@
     $(function(){
         var text = $('#text')
         $('#commit').on('click',function(){
-            socket.emit('chat', 'browser: ' + text.val());
+            socket.emit('input', 'browser: ' + text.val());
+            $('.chat').append($('<p>browser: ' + text.val()+'</p>'));
             text.val('');
         })
     });
