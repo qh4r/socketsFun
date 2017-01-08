@@ -5,7 +5,7 @@
     <style>#the_video{display:none;}</style>
 </head>
 <body>
-<h1>11.html</h1>
+<h1>test webRTC</h1>
 
 <video id="the_video" width="500px" height="410px"></video>
 
@@ -13,7 +13,7 @@
 <script src="/node_modules/asynquence/asq.js"></script>
 <script src="/node_modules/asynquence-contrib/contrib.js"></script>
 <script src="/h5ive.bundle.js"></script>
-<script src="/node_modules/socket.io/lib/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
 <script>
 
@@ -210,12 +210,21 @@
 
                 if (caller) {
                     console.log("CALLER!!");
-
+                    ASQ(getMediaStream)
+                            .seq(sendOffer)
+                            .then(getRemoteSDP)
+                            .pipe(done)
                     // ASQ here
                 }
                 else {
                     console.log("RECEIVER!!");
-
+                    ASQ()
+                            .gate(
+                                    getMediaStream,
+                                    getRemoteSDP
+                            )
+                            .then(sendAnswer)
+                            .pipe(done);
                     // ASQ here
                 }
             })

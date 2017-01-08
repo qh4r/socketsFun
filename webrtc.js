@@ -2,7 +2,7 @@ function handleHTTP(req,res) {
     if (req.method == "GET") {
         if (/^\/\d+(?=$|[\/?#])/.test(req.url)) {
             req.addListener("end",function(){
-                req.url = req.url.replace(/^\/(\d+).*$/,"/$1.html");
+                req.url = req.url.replace(/^\/(\d+).*$/,"/webrtc.html");
                 static_files.serve(req,res);
             });
             req.resume();
@@ -11,7 +11,8 @@ function handleHTTP(req,res) {
             req.url == "/jquery.js" ||
             req.url == "/node_modules/asynquence/asq.js" ||
             req.url == "/node_modules/asynquence-contrib/contrib.js" ||
-            req.url == "/h5ive.bundle.js"
+            req.url == "/h5ive.bundle.js" ||
+            req.url == "/socket.io.js"
         ) {
             req.addListener("end",function(){
                 static_files.serve(req,res);
@@ -49,6 +50,10 @@ function connection(socket) {
     }
 
     socket.on("disconnect",disconnect);
+
+    socket.on("signal", function(msg){
+       socket.broadcast.emit(msg);
+    });
 
     // is there a channel waiting for a socket to join it?
     if (
